@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>CheStor — маскот, эскиз 3 (бомбер)</title>
+<style>
+  body { margin: 0; display: flex; font-family: ui-monospace, "JetBrains Mono", monospace; }
+  .panel { width: 420px; height: 540px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .label { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2px; }
+
+  /* Одна и та же картинка, разные формы — только переменными, как темы сайта. */
+  .human {
+    background: #eef1f5; color: #2477cc;
+    --line: #0f0f0f; --skin: #eccbb4; --skin-shade: #d9b39b; --hair: #141216;
+    --jacket: #1d3456; --jacket-shade: #142640; --rib: #2b4a75; --lining: #c41a34;
+    --tee: #d6d9de; --tee-shade: #bfc3c9; --sclera: #ffffff; --iris: #141216;
+    --crystal: #d21c3a; --glass: #e9f1f5; --scar: #9c5b52; --cup: #f2ede4; --cup-band: #8a5a3b;
+  }
+  .ghoul {
+    background: #0e0b0c; color: #ff4d66;
+    --line: #060405; --skin: #d9cfcd; --skin-shade: #bfb2b0; --hair: #141216;
+    --jacket: #c41a34; --jacket-shade: #8f1024; --rib: #6e0f22; --lining: #1d3456;
+    --tee: #bdb4b6; --tee-shade: #a39a9c; --sclera: #060405; --iris: #ff1f45;
+    --crystal: #ff1f45; --glass: #f3e9ea; --scar: #ff3355; --cup: #f2ede4; --cup-band: #8a5a3b;
+  }
+  .human .only-ghoul, .ghoul .only-human { display: none; }
+
+  .line { stroke: var(--line); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+  .thin { stroke: var(--line); stroke-width: 3; stroke-linecap: round; fill: none; }
+  .skin { fill: var(--skin); } .skin-shade { fill: var(--skin-shade); }
+  .hair { fill: var(--hair); }
+  .jacket { fill: var(--jacket); } .jacket-shade { fill: var(--jacket-shade); }
+  .rib { fill: var(--rib); } .lining { fill: var(--lining); }
+  .tee { fill: var(--tee); } .tee-shade { fill: var(--tee-shade); }
+  .sclera { fill: var(--sclera); } .iris { fill: var(--iris); }
+  .glass { fill: var(--glass); } .crystal { fill: var(--crystal); }
+  .scar { stroke: var(--scar); stroke-width: 3.5; stroke-linecap: round; fill: none; }
+  .cup { fill: var(--cup); } .cup-band { fill: var(--cup-band); }
+  .ghoul .glow { filter: url(#glow); }
+</style>
+</head>
+<body>
+<div class="panel human"><div class="art"></div><div class="label">01 · Человек</div></div>
+<div class="panel ghoul"><div class="art"></div><div class="label">02 · Гуль — бомбер наизнанку</div></div>
+
+<template id="mascot">
+<svg width="400" height="500" viewBox="0 0 400 500">
+  <defs>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="aura" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#e2203f" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#e2203f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect class="only-ghoul" width="400" height="500" fill="url(#aura)"/>
+
+  <!-- футболка -->
+  <path class="tee line" d="M150,292 L250,292 L242,500 L158,500 Z"/>
+  <path class="tee-shade" d="M200,330 L242,330 L240,500 L210,500 Z" opacity="0.6"/>
+
+  <!-- шея и вырез -->
+  <rect class="skin line" x="181" y="248" width="38" height="52"/>
+  <path class="skin-shade" d="M183,252 L217,252 L217,268 Q200,276 183,268 Z"/>
+  <path class="skin line" d="M174,291 Q200,322 226,291 Z"/>
+  <!-- шов с шипами -->
+  <g class="glow">
+    <path class="scar" d="M186,296 L210,312"/>
+    <path class="scar" d="M189,291 L184,303 M196,296 L191,308 M203,301 L198,313 M210,305 L206,316"/>
+  </g>
+
+  <!-- бомбер: левая и правая полы -->
+  <path class="jacket line" d="M68,500 L76,362 C80,322 108,300 150,290 L166,296 L180,500 Z"/>
+  <path class="jacket line" d="M332,500 L324,362 C320,322 292,300 250,290 L234,296 L220,500 Z"/>
+  <path class="jacket-shade" d="M166,300 L180,500 L150,500 L148,340 Z" opacity="0.7"/>
+  <path class="jacket-shade" d="M234,300 L220,500 L250,500 L254,340 Z" opacity="0.7"/>
+  <!-- подкладка видна у края пол: у человека красная, у вывернутого — синяя -->
+  <path class="lining" d="M166,298 L174,298 L186,500 L180,500 Z"/>
+  <path class="lining" d="M234,298 L226,298 L214,500 L220,500 Z"/>
+  <!-- трикотажный воротник -->
+  <path class="rib line" d="M126,302 C140,286 158,282 176,292 L170,304 C156,298 142,300 132,310 Z"/>
+  <path class="rib line" d="M274,302 C260,286 242,282 224,292 L230,304 C244,298 258,300 268,310 Z"/>
+  <!-- молния -->
+  <path class="thin" d="M175,320 L184,500" stroke-dasharray="3 5" opacity="0.5"/>
+
+  <!-- правая рука вниз, кисть в кармане -->
+  <path class="jacket line" d="M324,350 C338,400 342,450 340,500 L294,500 C294,450 292,400 296,360 Z"/>
+  <path class="jacket-shade" d="M300,380 C300,430 300,470 300,500 L294,500 C294,450 292,400 296,360 Z" opacity="0.7"/>
+
+  <!-- левая рука: плечо вниз, предплечье вверх к стакану -->
+  <path class="jacket line" d="M74,356 C60,400 62,452 80,482 L126,472 C118,440 116,400 116,366 Z"/>
+  <rect class="jacket-shade line" x="82" y="382" width="22" height="30" rx="3" stroke-width="3"/>
+  <path class="thin" d="M86,390 L100,390" stroke-width="2"/>
+  <path class="jacket line" d="M82,478 L126,470 L172,432 L146,402 Z"/>
+  <path class="rib line" d="M138,410 L156,396 L176,424 L160,436 Z" stroke-width="4"/>
+
+  <!-- кофе -->
+  <path class="cup line" d="M152,344 L200,344 L194,432 L158,432 Z"/>
+  <rect class="line" x="147" y="334" width="58" height="14" rx="4" fill="#141216"/>
+  <path class="cup-band" d="M155,372 L197,372 L195,398 L157,398 Z"/>
+  <!-- кисть: четыре пальца поперёк стакана, большой сверху -->
+  <g class="skin line" stroke-width="3.5">
+    <rect x="146" y="392" width="42" height="11" rx="5.5"/>
+    <rect x="146" y="402" width="44" height="11" rx="5.5"/>
+    <rect x="146" y="412" width="42" height="11" rx="5.5"/>
+    <rect x="148" y="422" width="36" height="10" rx="5"/>
+  </g>
+  <ellipse class="skin line" cx="190" cy="386" rx="8" ry="5.5" transform="rotate(-30 190 386)" stroke-width="3.5"/>
+
+  <!-- уши -->
+  <ellipse class="skin line" cx="151" cy="196" rx="8" ry="12" stroke-width="4"/>
+  <ellipse class="skin line" cx="249" cy="196" rx="8" ry="12" stroke-width="4"/>
+
+  <!-- лицо -->
+  <path class="skin line" d="M152,164 C152,122 248,122 248,164 L246,204 C244,234 226,254 200,258 C176,254 158,236 154,208 Z"/>
+
+  <!-- серьги-колбы с RC-кристаллом -->
+  <g>
+    <path class="thin" d="M150,206 L150,214" stroke-width="2.5"/>
+    <rect x="145" y="212" width="10" height="5" rx="1.5" fill="#6b4a33"/>
+    <rect class="glass line" x="144" y="216" width="12" height="20" rx="3.5" stroke-width="2.5"/>
+    <path class="crystal glow" d="M150,220 L154,226 L150,232 L146,226 Z"/>
+    <path class="thin" d="M250,206 L250,214" stroke-width="2.5"/>
+    <rect x="245" y="212" width="10" height="5" rx="1.5" fill="#6b4a33"/>
+    <rect class="glass line" x="244" y="216" width="12" height="20" rx="3.5" stroke-width="2.5"/>
+    <path class="crystal glow" d="M250,220 L254,226 L250,232 L246,226 Z"/>
+  </g>
+
+  <!-- глаза: тяжёлые веки, взгляд вбок -->
+  <path class="sclera" d="M164,194 Q180,185 196,193 Q181,203 164,194 Z"/>
+  <path class="sclera" d="M206,195 Q222,186 238,195 Q222,204 206,195 Z"/>
+  <g class="glow">
+    <circle class="iris" cx="189" cy="194.5" r="5.5"/>
+    <circle class="iris" cx="231.5" cy="195.5" r="5.5"/>
+  </g>
+  <circle class="only-ghoul" cx="189" cy="194.5" r="2" fill="#060405"/>
+  <circle class="only-ghoul" cx="231.5" cy="195.5" r="2" fill="#060405"/>
+  <path class="line" d="M160,192 Q180,184 199,191" stroke-width="6.5"/>
+  <path class="line" d="M203,193 Q222,186 241,193" stroke-width="6.5"/>
+  <path class="thin" d="M170,203 Q181,206 192,202" stroke-width="2"/>
+  <path class="thin" d="M212,204 Q223,207 234,203" stroke-width="2"/>
+  <!-- брови: одна приподнята -->
+  <path class="line" d="M160,176 Q178,158 199,170" stroke-width="7"/>
+  <path class="line" d="M205,181 Q222,176 241,179" stroke-width="7"/>
+
+  <!-- человек: нос и закрытый рот -->
+  <g class="only-human">
+    <path class="thin" d="M199,206 L194,221 L202,222" stroke-width="2.5"/>
+    <path class="thin" d="M186,238 L208,236 Q213,235 216,231"/>
+  </g>
+
+  <!-- гуль: маска на нижнюю половину лица, рот — облачко сообщения -->
+  <g class="only-ghoul">
+    <path class="line" fill="#ece4e2" d="M153,206 C170,202 186,206 200,201 C214,206 230,202 247,206 L245,222 C242,244 225,257 200,260 C176,257 158,244 155,224 Z"/>
+    <path d="M200,203 L200,214" stroke="#b9aaa8" stroke-width="2.5"/>
+    <rect x="180" y="222" width="40" height="22" rx="8" fill="#060405"/>
+    <path d="M186,242 L178,254 L196,243 Z" fill="#060405"/>
+    <circle cx="190" cy="233" r="2.8" fill="#ff4d66"/>
+    <circle cx="200" cy="233" r="2.8" fill="#ff4d66" opacity="0.7"/>
+    <circle cx="210" cy="233" r="2.8" fill="#ff4d66" opacity="0.4"/>
+  </g>
+
+  <!-- волосы: растрёпанные пряди, чёлка на лоб -->
+  <path class="hair line" d="M132,120 Q118,112 112,120 Q124,124 128,138 Z"/>
+  <path class="hair line" d="M270,118 Q286,110 292,118 Q280,124 276,138 Z"/>
+  <path class="hair line" d="M200,62 Q210,48 224,50 Q212,56 214,68 Z"/>
+  <path class="hair line" d="M140,198 C118,184 112,150 124,128 C110,114 120,90 140,94 C142,72 166,62 182,72 C194,54 224,56 232,74 C252,66 274,82 268,104 C288,112 290,146 274,162 C284,178 272,196 258,198 Q262,176 248,160 Q250,176 240,184 Q236,160 220,150 Q222,168 210,178 Q206,156 192,150 Q190,170 176,180 Q178,160 166,156 Q162,174 152,184 Q154,168 146,162 Q144,182 140,198 Z"/>
+  <path d="M180,96 Q196,86 214,94 M226,108 Q244,104 256,116" stroke="#3a3540" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
+</template>
+
+<script>
+  // Одна разметка на обе формы: отличаются только переменные панели, как темы сайта.
+  const markup = document.getElementById("mascot").innerHTML;
+  document.querySelectorAll(".art").forEach((slot) => { slot.innerHTML = markup; });
+</script>
+</body>
+</html>
