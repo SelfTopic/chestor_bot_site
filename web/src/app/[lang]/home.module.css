@@ -76,6 +76,13 @@
   padding: var(--space-8) var(--space-4) 0;
 }
 
+.sectionLead {
+  max-width: 680px;
+  margin-block: calc(-1 * var(--space-4)) var(--space-6);
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
 .sectionTitle {
   margin-block: var(--space-2) var(--space-6);
   font-family: var(--font-display);

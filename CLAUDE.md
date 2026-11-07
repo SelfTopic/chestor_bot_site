@@ -56,6 +56,22 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm build
 Посмотреть собранное: `python3 -m http.server -d out 3000`. Готово — только после скриншотов
 1440 и 390 px в обеих темах (`docs/stack.md`, 4.2.1).
 
+Бэкенд — `api/` (Python, aiohttp, Poetry). В оболочке владельца `VIRTUAL_ENV` указывает на
+глобальный Python pyenv, и Poetry принимает его за активное окружение — команды запускать
+через `env -u VIRTUAL_ENV`, тогда окружение проекта — `api/.venv`:
+
+```bash
+cd api
+env -u VIRTUAL_ENV poetry install
+env -u VIRTUAL_ENV poetry run ruff check . && env -u VIRTUAL_ENV poetry run ruff format --check .
+env -u VIRTUAL_ENV poetry run pyright && env -u VIRTUAL_ENV poetry run pytest -q
+env -u VIRTUAL_ENV poetry run python -m chestor_api   # :8090, `pnpm dev` проксирует /api/* сюда
+```
+
+Без `GHOUL_QUIZ_EMAIL` и сохранённой сессии квиз работает на запасной колоде
+(`api/chestor_api/data/fallback_questions.json`). Сессию бота локально не использовать: Ghoul
+Quiz пускает одну сессию только в одно место.
+
 ## Секреты
 
 Ключи деплоя, адрес и пользователи сервера, пароли базы — только в секретах GitHub Actions

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SectionCards } from "@/components/docs/SectionCards";
+import { Quiz } from "@/components/quiz/Quiz";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Faq } from "@/components/site/Faq";
 import { SiteNav } from "@/components/site/SiteNav";
@@ -62,6 +63,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <SectionCards lang={lang} pages={pages} />
           </section>
         ) : null}
+        <section className={styles.section} id="quiz">
+          <p className={styles.kicker}>{dict.quiz.kicker}</p>
+          <h2 className={styles.sectionTitle}>{dict.quiz.title}</h2>
+          <p className={styles.sectionLead}>{dict.quiz.lead}</p>
+          <Quiz lang={lang} />
+        </section>
         <section className={styles.section} id="faq">
           <p className={styles.kicker}>{dict.home.faqKicker}</p>
           <h2 className={styles.sectionTitle}>{dict.home.faqTitle}</h2>
