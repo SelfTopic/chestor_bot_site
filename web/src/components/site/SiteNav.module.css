@@ -1,0 +1,40 @@
+.nav {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--header-height);
+  padding: 0 var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.logo:hover {
+  text-decoration: none;
+  color: var(--color-accent-text);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-4);
+  margin-inline-start: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.links a {
+  color: var(--color-text-muted);
+}
+
+.links a:hover {
+  color: var(--color-accent-text);
+}

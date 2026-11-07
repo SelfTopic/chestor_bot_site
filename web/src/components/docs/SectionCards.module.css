@@ -1,0 +1,80 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-4);
+}
+
+/* Вся карточка кликабельна через растянутую ссылку заголовка, ссылки тем — поверх неё. */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md), var(--glow);
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  color: var(--color-accent-text);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.link {
+  color: var(--color-text);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.topics {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.topics a {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+}
+
+.topics a:hover {
+  text-decoration: none;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.more {
+  padding: 2px 4px;
+  color: var(--color-text-faint);
+}

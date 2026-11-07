@@ -1,0 +1,20 @@
+.picker {
+  display: grid;
+  place-content: center;
+  gap: var(--space-5);
+  min-height: 100dvh;
+  text-align: center;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+}
+
+.langs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  font-family: var(--font-mono);
+}

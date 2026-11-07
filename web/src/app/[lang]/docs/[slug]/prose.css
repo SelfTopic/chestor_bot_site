@@ -1,0 +1,191 @@
+/* Текст раздела приходит из Markdown бота готовым HTML, поэтому стили — по тегам внутри .prose. */
+
+.prose {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.prose > * + * {
+  margin-block-start: var(--space-4);
+}
+
+.prose h2 {
+  margin-block-start: var(--space-7);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+/* Подраздел — одна команда или механика: моноширинное имя, как команда в чате. */
+.prose h3 {
+  position: relative;
+  margin-block-start: var(--space-7);
+  padding-block-start: var(--space-5);
+  border-block-start: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-accent-text);
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+.prose h3 + * {
+  margin-block-start: var(--space-3);
+}
+
+.prose .topic-anchor {
+  position: absolute;
+  inset-inline-start: -1.2em;
+  color: var(--color-text-faint);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.prose h3:hover .topic-anchor,
+.prose .topic-anchor:focus-visible {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose ul,
+.prose ol {
+  padding-inline-start: var(--space-5);
+}
+
+.prose ul {
+  list-style: none;
+}
+
+.prose ul > li {
+  position: relative;
+}
+
+.prose ul > li::before {
+  content: "—";
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--space-5));
+  color: var(--color-accent-text);
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose ol > li::marker {
+  font-family: var(--font-mono);
+  color: var(--color-accent-text);
+}
+
+.prose li + li {
+  margin-block-start: var(--space-2);
+}
+
+.prose code {
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+.prose pre {
+  padding: var(--space-4);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-md);
+  background: var(--code-bg);
+  overflow-x: auto;
+}
+
+.prose pre code {
+  padding: 0;
+  background: none;
+  color: var(--syntax-text);
+}
+
+/* Цитата в справке — предупреждение или подсказка: выноска с полосой, как на chestor.site/bot. */
+.prose blockquote {
+  padding: var(--space-4) var(--space-5);
+  border-inline-start: 4px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+}
+
+.prose blockquote > * + * {
+  margin-block-start: var(--space-2);
+}
+
+.prose .table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-md);
+}
+
+.prose th {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-bg-sunken);
+}
+
+.prose th,
+.prose td {
+  padding: var(--space-3) var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.prose th[align="right"],
+.prose td[align="right"] {
+  text-align: end;
+  white-space: nowrap;
+}
+
+.prose tr:last-child td {
+  border-block-end: 0;
+}
+
+.prose details {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.prose summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.prose details[open] summary {
+  margin-block-end: var(--space-3);
+}
+
+.prose hr {
+  border: 0;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.prose .footnotes {
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+}

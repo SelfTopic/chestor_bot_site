@@ -1,0 +1,85 @@
+.hero {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) 0;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.title {
+  margin-block-start: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: var(--glow);
+}
+
+:global(:root[data-theme="ghoul"]) .title {
+  color: var(--color-accent-strong);
+}
+
+.lead {
+  max-width: 680px;
+  margin-block-start: var(--space-5);
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-start: var(--space-6);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: var(--glow);
+}
+
+.primary:hover {
+  text-decoration: none;
+  background: var(--color-accent-strong);
+}
+
+.secondary {
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.secondary:hover {
+  text-decoration: none;
+  border-color: var(--color-accent);
+}
+
+.section {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) 0;
+}
+
+.sectionTitle {
+  margin-block: var(--space-2) var(--space-6);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  line-height: 1.1;
+}
