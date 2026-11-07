@@ -18,6 +18,51 @@ export const en: Dict = {
     docs: "Docs",
     sectionsKicker: "What the bot does",
     sectionsTitle: "It's all in the docs",
+    faqKicker: "Questions",
+    faqTitle: "FAQ",
+  },
+  faq: [
+    {
+      question: "Is there a Tokyo Ghoul bot for Telegram?",
+      answer:
+        "Yes, CheStor — @chestor_chat_bot. You become a ghoul with a random kagune type, level up your stats, fight mobs and other players in duels, watch your hunger and earn CheSton.",
+      slug: "ghoul",
+    },
+    {
+      question: "How do I start playing?",
+      answer:
+        "Send /start to the bot in private messages and subscribe to @chestor_channel — the game is locked without it. Then type “grow kagune” to become a ghoul and “snap” for your first money.",
+      slug: "start",
+    },
+    {
+      question: "Is the bot free?",
+      answer:
+        "Yes. There is nothing to pay real money for: the whole economy runs on the in-game CheSton currency and RC cells.",
+      slug: "economy",
+    },
+    {
+      question: "Can I add the bot to a group?",
+      answer:
+        "Yes. In a group the whole chat sees the game: duels, chat leaderboards, families. The bot also moderates the group: mute, ban, warnings, welcome message and rules.",
+      slug: "moderation",
+    },
+    {
+      question: "What languages does the bot speak?",
+      answer:
+        "Russian and English. In a group the admins choose the language, in private messages everyone picks their own; until then the bot uses your Telegram language.",
+      slug: "start",
+    },
+    {
+      question: "Do commands need a slash?",
+      answer:
+        "Almost all commands are plain words without a slash: “snap”, “duel”, “drink coffee”. For a short answer about any command, type /help and the command name right in the bot.",
+      slug: "start",
+    },
+  ],
+  seo: {
+    gameAltNames: ["Tokyo Ghoul Telegram bot", "Tokyo Ghoul RPG in Telegram", "@chestor_chat_bot"],
+    breadcrumbHome: "Home",
+    faqMore: "Details",
   },
   docs: {
     kicker: "Docs",

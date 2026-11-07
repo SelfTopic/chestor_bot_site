@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { SectionCards } from "@/components/docs/SectionCards";
 import { SiteNav } from "@/components/site/SiteNav";
-import { isLang, LANGS, otherLang } from "@/i18n/config";
+import { DEFAULT_LANG, isLang, LANGS, otherLang } from "@/i18n/config";
 import { t } from "@/i18n";
 import { loadPages } from "@/lib/docs/load";
 import { docsPath } from "@/lib/site";
@@ -23,9 +23,10 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/docs">): P
     description: dict.docs.lead,
     alternates: {
       canonical: docsPath(lang),
-      languages: Object.fromEntries(
-        LANGS.filter((other) => loadPages(other).length > 0).map((other) => [other, docsPath(other)]),
-      ),
+      languages: {
+        ...Object.fromEntries(LANGS.filter((other) => loadPages(other).length > 0).map((other) => [other, docsPath(other)])),
+        "x-default": docsPath(DEFAULT_LANG),
+      },
     },
   };
 }

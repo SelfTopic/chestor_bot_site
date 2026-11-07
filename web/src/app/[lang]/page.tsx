@@ -3,10 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SectionCards } from "@/components/docs/SectionCards";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Faq } from "@/components/site/Faq";
 import { SiteNav } from "@/components/site/SiteNav";
 import { isLang, LANGS, otherLang } from "@/i18n/config";
 import { t } from "@/i18n";
 import { loadPages } from "@/lib/docs/load";
+import { faqLd, gameLd, websiteLd } from "@/lib/seo/jsonLd";
 import { BOT_ADD_TO_GROUP_URL, BOT_URL, docsPath } from "@/lib/site";
 
 import styles from "./home.module.css";
@@ -15,7 +18,10 @@ export async function generateMetadata({ params }: PageProps<"/[lang]">): Promis
   const { lang } = await params;
   if (!isLang(lang)) return {};
   return {
-    alternates: { canonical: `/${lang}/`, languages: Object.fromEntries(LANGS.map((other) => [other, `/${other}/`])) },
+    alternates: {
+      canonical: `/${lang}/`,
+      languages: { ...Object.fromEntries(LANGS.map((other) => [other, `/${other}/`])), "x-default": "/" },
+    },
   };
 }
 
@@ -56,7 +62,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <SectionCards lang={lang} pages={pages} />
           </section>
         ) : null}
+        <section className={styles.section} id="faq">
+          <p className={styles.kicker}>{dict.home.faqKicker}</p>
+          <h2 className={styles.sectionTitle}>{dict.home.faqTitle}</h2>
+          <Faq lang={lang} />
+        </section>
       </main>
+      <JsonLd data={[websiteLd(lang), gameLd(lang), faqLd(lang)]} />
     </>
   );
 }

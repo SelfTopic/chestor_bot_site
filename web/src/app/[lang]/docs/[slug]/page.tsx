@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SiteNav } from "@/components/site/SiteNav";
-import { isLang, LANGS, otherLang } from "@/i18n/config";
+import { DEFAULT_LANG, isLang, LANGS, otherLang } from "@/i18n/config";
 import { t } from "@/i18n";
 import { findPage, loadPages } from "@/lib/docs/load";
 import { renderMarkdown } from "@/lib/docs/render";
+import { docsPageLd } from "@/lib/seo/jsonLd";
+import { markdownPath } from "@/lib/seo/markdown";
 import { BOT_URL, docsPath } from "@/lib/site";
 
 import "./prose.css";
@@ -28,10 +31,13 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/docs/[slug
     description: `${page.title}: ${page.topics.map((topic) => topic.heading).join(", ")}`.slice(0, 200),
     alternates: {
       canonical: docsPath(lang, slug),
-      languages: Object.fromEntries(
-        LANGS.filter((other) => findPage(other, slug)).map((other) => [other, docsPath(other, slug)]),
-      ),
+      languages: {
+        ...Object.fromEntries(LANGS.filter((other) => findPage(other, slug)).map((other) => [other, docsPath(other, slug)])),
+        "x-default": docsPath(DEFAULT_LANG, slug),
+      },
+      types: { "text/markdown": markdownPath(lang, slug) },
     },
+    openGraph: { type: "article", title: page.heading, url: docsPath(lang, slug) },
   };
 }
 
@@ -121,6 +127,7 @@ export default async function DocsSection({ params }: PageProps<"/[lang]/docs/[s
           </nav>
         </main>
       </div>
+      <JsonLd data={docsPageLd(lang, page)} />
     </>
   );
 }

@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  # Бот сможет пересобирать сайт после правки справки (docs/stack.md, 1.4).
+  repository_dispatch:
+    types: [bot-docs-updated]
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm fetch-docs
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
+      - name: Indexing files are in the build
+        run: |
+          for file in robots.txt sitemap.xml llms.txt llms-full.txt md/ru/start.md ru/docs/index.html en/docs/index.html; do
+            test -s "out/$file" || { echo "missing out/$file"; exit 1; }
+          done
+          grep -q "<loc>https://chestor-bot.site/ru/docs/start/</loc>" out/sitemap.xml
+          grep -q '"@type":"FAQPage"' out/ru/index.html

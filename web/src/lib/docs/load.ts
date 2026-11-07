@@ -3,6 +3,7 @@ import path from "node:path";
 
 import type { Lang } from "@/i18n/config";
 
+import { lastModified } from "./lastmod";
 import { DocsError, parsePage, type DocPage } from "./parse";
 
 // Корень справки бота: русская — в нём, переводы — в подпапках языков (en/).
@@ -29,7 +30,10 @@ export function loadPages(lang: Lang): DocPage[] {
   const pages = readdirSync(dir)
     .filter((name) => name.endsWith(".md") && !name.startsWith("_"))
     .sort()
-    .map((name) => parsePage(name, readFileSync(path.join(dir, name), "utf-8")));
+    .map((name) => {
+      const file = path.join(dir, name);
+      return { ...parsePage(name, readFileSync(file, "utf-8")), updated: lastModified(file) };
+    });
 
   const slugs = new Set<string>();
   for (const page of pages) {

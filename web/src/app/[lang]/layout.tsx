@@ -24,6 +24,17 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     description: dict.meta.description,
     applicationName: "CheStor",
     openGraph: { type: "website", siteName: "CheStor", locale: OG_LOCALE[lang] },
+    verification: siteVerification(),
+  };
+}
+
+// Коды кабинетов поисковиков — из переменных сборки (docs/seo.md, 1.9); пустые не выводятся.
+function siteVerification(): Metadata["verification"] {
+  const bing = process.env.BING_SITE_VERIFICATION;
+  return {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    yandex: process.env.YANDEX_VERIFICATION || undefined,
+    other: bing ? { "msvalidate.01": bing } : undefined,
   };
 }
 

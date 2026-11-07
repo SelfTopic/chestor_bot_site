@@ -12,6 +12,7 @@ export type DocPage = {
   helpWords: string[];
   markdown: string;
   topics: DocTopic[];
+  updated?: Date;
 };
 
 const FRONT = "---";
